@@ -1,5 +1,11 @@
 # Conexão Saber - Plataforma de Treino de Redação para o ENEM
 
+## 🎥 Vídeo Demonstrativo
+
+Assista ao vídeo demonstrativo do sistema em funcionamento:
+
+**[🎬 Link do vídeo demonstrativo](https://www.youtube.com/watch?v=aIu2M-98hQo&feature=youtu.be)**
+
 ## 📋 Objetivo do Projeto
 
 O **Conexão Saber** é uma plataforma multiplataforma desenvolvida para auxiliar estudantes na preparação para a redação do ENEM. O sistema oferece correção automática por Inteligência Artificial, avaliação detalhada por competências e dashboard com métricas de progresso para acompanhamento da evolução do estudante.
@@ -265,11 +271,6 @@ Atualmente, o sistema não possui credenciais de teste pré-configuradas. Para t
 
 **Nota:** Em produção, as credenciais de teste podem ser fornecidas através de seed de dados ou configuração administrativa.
 
-## 🎥 Vídeo Demonstrativo
-
-Assista ao vídeo demonstrativo do sistema em funcionamento:
-
-**[🎬 Link do vídeo demonstrativo](https://www.youtube.com/watch?v=aIu2M-98hQo&feature=youtu.be)**
 
 O vídeo apresenta todas as funcionalidades principais do Conexão Saber, incluindo cadastro, criação de redação, correção automática por IA e visualização de resultados.
 
