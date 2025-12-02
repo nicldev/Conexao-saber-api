@@ -1,4 +1,4 @@
-# Relatório de Validação com Público-Alvo - ConexãoSaber
+# Relatório de Validação com Público-Alvo - Conexão Saber
 
 ## 1. Informações Gerais
 
@@ -13,7 +13,7 @@
 
 ### 2.1 Objetivo da Apresentação
 
-Apresentar o sistema ConexãoSaber ao público-alvo específico, demonstrar as funcionalidades implementadas e coletar feedback sobre a usabilidade, utilidade e possíveis melhorias.
+Apresentar o sistema Conexão Saber ao público-alvo específico, demonstrar as funcionalidades implementadas e coletar feedback sobre a usabilidade, utilidade e possíveis melhorias.
 
 ### 2.2 Funcionalidades Apresentadas
 
@@ -35,6 +35,10 @@ Apresentar o sistema ConexãoSaber ao público-alvo específico, demonstrar as f
    - Visualização de progresso
    - Métricas de desempenho
    - Histórico de redações
+
+5. **Roadmap de Estudos**
+   - Sugestões personalizadas
+   - Indicação de áreas de melhoria
 
 ### 2.3 Reação do Público-Alvo
 
@@ -145,7 +149,7 @@ Funcionalidades sugeridas que serão consideradas para versões futuras:
 
 ### 5.3 Impacto Esperado
 
-Com base na validação realizada, espera-se que o RedaIA:
+Com base na validação realizada, espera-se que o Conexão Saber:
 
 - Auxilie [X] estudantes na preparação para o ENEM
 - Reduza o tempo de correção de redações em [X]%
@@ -183,7 +187,7 @@ A validação com o público-alvo específico foi fundamental para:
 3. Validar a usabilidade da interface
 4. Coletar feedback construtivo para evolução do projeto
 
-O feedback recebido foi extremamente positivo e as sugestões de melhoria foram incorporadas ao projeto, garantindo que o ConexãoSaber seja uma ferramenta útil e eficaz para estudantes que se preparam para o ENEM.
+O feedback recebido foi extremamente positivo e as sugestões de melhoria foram incorporadas ao projeto, garantindo que o Conexão Saber seja uma ferramenta útil e eficaz para estudantes que se preparam para o ENEM.
 
 **Próximos Passos:**
 1. Implementar ajustes finais baseados no feedback
