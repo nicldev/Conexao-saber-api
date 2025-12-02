@@ -317,14 +317,14 @@ npm run test:watch
 
 ## 👥 Equipe de Desenvolvimento
 
-| Nome                     | Matrícula | Papel                            | Principais Contribuições                                                          |
-| ------------------------ | --------- | -------------------------------- | --------------------------------------------------------------------------------- |
-| **Nicolas Lima Ribeiro** | 2326327  | Frontend & Documentação          | Desenvolvimento UI, páginas e rotas, integração com API e documentação do projeto |
-| **Thiago Targino de Souza**       | 2326340  | Backend & Banco de Dados         | Modelagem do banco, CRUD, autenticação, serviços e infraestrutura da API          |
-| **Rodrigo de Queiroz Oliveira Rodrigues**     | 2326198  | QA / Testes                      | Testes funcionais e validação de experiência do usuário                           |
-| **Francisco Flavio Rodrigues de Menezes**       | 2314219  | QA / Testes                      | Testes, revisão e acompanhamento de funcionalidade                                |
-| **Cleberson Assunção Tavares**       | 2325404  | Pesquisa / Feedback com usuários | Validação prática com alunos e coleta de melhorias                                |
-| **Mayara Pinto da Silva**     | 2317573  | QA e Pesquisa                    | Testes e avaliação de usabilidade                                                 |
+| Nome                                      | Matrícula | Papel                            | Principais Contribuições                                                          |
+|-------------------------------------------|-----------|----------------------------------|-----------------------------------------------------------------------------------|
+| **Nicolas Lima Ribeiro**                  | 2326327   | Frontend & Documentação          | Desenvolvimento da UI, páginas, rotas, integração com API e documentação do projeto |
+| **Thiago Targino de Souza**               | 2326340   | Backend & Banco de Dados         | Modelagem do banco, CRUD, autenticação, serviços e infraestrutura da API          |
+| **Rodrigo de Queiroz Oliveira Rodrigues** | 2326198   | QA / Testes                      | Testes funcionais e validação da experiência do usuário                           |
+| **Francisco Flavio Rodrigues de Menezes** | 2314219   | QA / Testes                      | Testes, revisão e acompanhamento de funcionalidades                               |
+| **Cleberson Assunção Tavares**            | 2325404   | Pesquisa / Feedback com usuários | Validação prática com alunos e coleta de melhorias                                |
+| **Mayara Pinto da Silva**                 | 2317573   | QA e Pesquisa                    | Testes e avaliação de usabilidade                                                 |
 
 ## 🌱 Contribuição para o ODS 11
 
