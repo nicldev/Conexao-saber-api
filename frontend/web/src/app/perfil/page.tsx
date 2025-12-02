@@ -7,7 +7,7 @@ import { Heading } from '@/components/Heading'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { useAuth } from '@/contexts/AuthContext'
 import { useRouter } from 'next/navigation'
-import { User, Target, Edit, Loader2 } from 'lucide-react'
+import { User, Target, Edit, Loader2, Lock, Trash2, AlertTriangle } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { authService } from '@/lib/api/auth'
 
@@ -22,6 +22,18 @@ export default function Perfil() {
   const [grade, setGrade] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  
+  // Estados para alteração de senha
+  const [showChangePassword, setShowChangePassword] = useState(false)
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [changingPassword, setChangingPassword] = useState(false)
+  
+  // Estados para exclusão de conta
+  const [showDeleteAccount, setShowDeleteAccount] = useState(false)
+  const [deletePassword, setDeletePassword] = useState('')
+  const [deletingAccount, setDeletingAccount] = useState(false)
 
   // Redirecionar se não estiver autenticado
   useEffect(() => {
@@ -62,6 +74,66 @@ export default function Perfil() {
       setError(err.message || 'Erro ao atualizar perfil')
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+    setSuccess(null)
+
+    // Validações
+    if (newPassword !== confirmPassword) {
+      setError('As senhas não coincidem')
+      return
+    }
+
+    if (newPassword.length < 8) {
+      setError('A nova senha deve ter no mínimo 8 caracteres')
+      return
+    }
+
+    setChangingPassword(true)
+
+    try {
+      await authService.changePassword({
+        currentPassword,
+        newPassword,
+      })
+      setSuccess('Senha alterada com sucesso!')
+      setShowChangePassword(false)
+      setCurrentPassword('')
+      setNewPassword('')
+      setConfirmPassword('')
+    } catch (err: any) {
+      setError(err.message || 'Erro ao alterar senha')
+    } finally {
+      setChangingPassword(false)
+    }
+  }
+
+  const handleDeleteAccount = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+    setSuccess(null)
+
+    if (!deletePassword) {
+      setError('Por favor, confirme sua senha para excluir a conta')
+      return
+    }
+
+    setDeletingAccount(true)
+
+    try {
+      await authService.deleteAccount(deletePassword)
+      setSuccess('Conta excluída com sucesso. Redirecionando...')
+      setTimeout(() => {
+        authService.logout()
+      }, 2000)
+    } catch (err: any) {
+      setError(err.message || 'Erro ao excluir conta')
+    } finally {
+      setDeletingAccount(false)
     }
   }
 
@@ -190,6 +262,177 @@ export default function Perfil() {
             </form>
           </Card>
         </div>
+
+        {/* Alteração de Senha */}
+        <Card className="mt-6">
+          <Heading level={3} className="mb-6 flex items-center gap-2">
+            <Lock className="w-5 h-5" />
+            Alterar senha
+          </Heading>
+          {!showChangePassword ? (
+            <Button
+              variant="outline"
+              onClick={() => setShowChangePassword(true)}
+            >
+              Alterar senha
+            </Button>
+          ) : (
+            <form onSubmit={handleChangePassword} className="space-y-4">
+              <div>
+                <label className="small text-secondary dark:text-[#A9A9A9] mb-1 block transition-colors duration-300">
+                  Senha atual
+                </label>
+                <input
+                  type="password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-2 border border-border dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#202020] text-primary dark:text-[#F5F5F5] focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300"
+                  disabled={changingPassword}
+                />
+              </div>
+              <div>
+                <label className="small text-secondary dark:text-[#A9A9A9] mb-1 block transition-colors duration-300">
+                  Nova senha
+                </label>
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                  minLength={8}
+                  className="w-full px-4 py-2 border border-border dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#202020] text-primary dark:text-[#F5F5F5] focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300"
+                  disabled={changingPassword}
+                  placeholder="Mínimo 8 caracteres"
+                />
+              </div>
+              <div>
+                <label className="small text-secondary dark:text-[#A9A9A9] mb-1 block transition-colors duration-300">
+                  Confirmar nova senha
+                </label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={8}
+                  className="w-full px-4 py-2 border border-border dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#202020] text-primary dark:text-[#F5F5F5] focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300"
+                  disabled={changingPassword}
+                />
+              </div>
+              <div className="flex gap-2 pt-2">
+                <Button type="submit" disabled={changingPassword}>
+                  {changingPassword ? (
+                    <>
+                      <Loader2 className="w-4 h-4 inline mr-2 animate-spin" />
+                      Alterando...
+                    </>
+                  ) : (
+                    'Salvar nova senha'
+                  )}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setShowChangePassword(false)
+                    setCurrentPassword('')
+                    setNewPassword('')
+                    setConfirmPassword('')
+                    setError(null)
+                  }}
+                  disabled={changingPassword}
+                >
+                  Cancelar
+                </Button>
+              </div>
+            </form>
+          )}
+        </Card>
+
+        {/* Exclusão de Conta */}
+        <Card className="mt-6 border-red-200 dark:border-red-800">
+          <Heading level={3} className="mb-6 flex items-center gap-2 text-red-600 dark:text-red-400">
+            <Trash2 className="w-5 h-5" />
+            Zona de perigo
+          </Heading>
+          {!showDeleteAccount ? (
+            <div>
+              <p className="small text-secondary dark:text-[#A9A9A9] mb-4">
+                Ao excluir sua conta, todos os seus dados serão permanentemente removidos. Esta ação não pode ser desfeita.
+              </p>
+              <Button
+                variant="outline"
+                className="border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"
+                onClick={() => setShowDeleteAccount(true)}
+              >
+                <Trash2 className="w-4 h-4 inline mr-2" />
+                Excluir conta
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleDeleteAccount} className="space-y-4">
+              <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+                <div className="flex items-start gap-2">
+                  <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5" />
+                  <div>
+                    <p className="small font-semibold text-red-800 dark:text-red-300 mb-1">
+                      Atenção: Esta ação é irreversível
+                    </p>
+                    <p className="small text-red-700 dark:text-red-400">
+                      Todos os seus dados, incluindo redações e estatísticas, serão permanentemente excluídos.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label className="small text-secondary dark:text-[#A9A9A9] mb-1 block transition-colors duration-300">
+                  Confirme sua senha para excluir a conta
+                </label>
+                <input
+                  type="password"
+                  value={deletePassword}
+                  onChange={(e) => setDeletePassword(e.target.value)}
+                  required
+                  className="w-full px-4 py-2 border border-red-300 dark:border-red-700 rounded-md bg-white dark:bg-[#202020] text-primary dark:text-[#F5F5F5] focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors duration-300"
+                  disabled={deletingAccount}
+                  placeholder="Digite sua senha"
+                />
+              </div>
+              <div className="flex gap-2 pt-2">
+                <Button
+                  type="submit"
+                  disabled={deletingAccount}
+                  className="bg-red-600 hover:bg-red-700 text-white"
+                >
+                  {deletingAccount ? (
+                    <>
+                      <Loader2 className="w-4 h-4 inline mr-2 animate-spin" />
+                      Excluindo...
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 className="w-4 h-4 inline mr-2" />
+                      Confirmar exclusão
+                    </>
+                  )}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setShowDeleteAccount(false)
+                    setDeletePassword('')
+                    setError(null)
+                  }}
+                  disabled={deletingAccount}
+                >
+                  Cancelar
+                </Button>
+              </div>
+            </form>
+          )}
+        </Card>
       </div>
     </div>
   )

@@ -109,5 +109,22 @@ export const authService = {
   }): Promise<{ success: true; message: string; data: { user: User } }> {
     return apiClient.put('/api/user/profile', data)
   },
+
+  /**
+   * Alterar senha do usuário
+   */
+  async changePassword(data: {
+    currentPassword: string
+    newPassword: string
+  }): Promise<{ success: true; message: string }> {
+    return apiClient.put('/api/user/change-password', data)
+  },
+
+  /**
+   * Deletar conta do usuário
+   */
+  async deleteAccount(password: string): Promise<{ success: true; message: string }> {
+    return apiClient.delete('/api/user', { password })
+  },
 }
 
