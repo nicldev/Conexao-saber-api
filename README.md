@@ -193,7 +193,6 @@ npm run prisma:migrate
 npm run prisma:seed
 ```
 
-**Nota:** O sistema possui 12 temas de redação do ENEM pré-cadastrados que são automaticamente inseridos no banco quando necessário. Os temas são criados automaticamente na primeira requisição à API de temas.
 
 ### 4. Configure o Frontend
 
@@ -315,59 +314,6 @@ O projeto possui um script de seed que cria usuários de teste. Para usar:
    - Faça login com as credenciais de teste:
      - E-mail: `admin@redaia.com`
      - Senha: `password123`
-
-### Funcionalidades para Testar
-
-#### ✅ Autenticação
-- [ ] Cadastro de novo usuário (`/cadastro`)
-- [ ] Login com credenciais de teste
-- [ ] Verificação de e-mail (automática em desenvolvimento)
-
-#### ✅ Gerenciamento de Perfil (`/perfil`)
-- [ ] Visualizar dados do perfil
-- [ ] Atualizar nome, escola e série
-- [ ] Alterar senha (requer senha atual)
-- [ ] Excluir conta (requer confirmação por senha)
-
-#### ✅ Redações
-- [ ] Criar nova redação (`/redacao/nova`)
-- [ ] Escrever texto no editor
-- [ ] Ver contador de palavras/caracteres
-- [ ] Salvar rascunho automaticamente
-- [ ] Submeter para correção
-- [ ] Visualizar resultados detalhados
-
-#### ✅ Dashboard (`/dashboard`)
-- [ ] Visualizar estatísticas gerais
-- [ ] Ver histórico de redações
-- [ ] Analisar desempenho por competência
-- [ ] Acompanhar evolução
-
-#### ✅ Temas
-- [ ] Listar temas disponíveis
-- [ ] Selecionar tema para redação
-- [ ] Ver descrição dos temas
-
-### Troubleshooting
-
-**Problema: Backend não inicia**
-- Verifique se o PostgreSQL está rodando
-- Confirme que o arquivo `.env` está configurado corretamente
-- Verifique se as migrations foram executadas: `npm run prisma:migrate`
-
-**Problema: Frontend não conecta ao backend**
-- Verifique se o backend está rodando em `http://localhost:3333`
-- Confirme que `NEXT_PUBLIC_API_URL=http://localhost:3333` está no `.env.local`
-
-**Problema: Erro ao fazer login**
-- Execute o seed novamente: `npm run prisma:seed`
-- Verifique se o usuário foi criado no banco de dados
-
-**Problema: E-mail não verificado**
-- Em desenvolvimento, os e-mails são auto-verificados
-- Se necessário, altere `emailVerified: true` diretamente no banco
-
-O vídeo demonstrativo apresenta todas as funcionalidades principais do Conexão Saber, incluindo cadastro, criação de redação, correção automática por IA e visualização de resultados.
 
 ## 📚 Documentação Técnica
 
