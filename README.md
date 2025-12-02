@@ -69,7 +69,7 @@ O projeto resolve a dificuldade de estudantes do Ensino Médio em obter correç�
 - **React 18** - Biblioteca JavaScript para construção de interfaces
 - **TypeScript** - Linguagem de programação com tipagem estática
 - **Tailwind CSS** - Framework CSS utilitário para estilização
-- **Axios** - Biblioteca de JavaScript que permite fazer requisições HTTP de maneira simples e eficiente
+- **Fetch API** - API nativa do JavaScript para requisições HTTP
 
 ### Backend
 - **Node.js** (>=18) - Runtime JavaScript para execução no servidor
@@ -190,6 +190,8 @@ npm run prisma:migrate
 npm run prisma:seed
 ```
 
+**Nota:** O sistema possui 12 temas de redação do ENEM pré-cadastrados que são automaticamente inseridos no banco quando necessário. Os temas são criados automaticamente na primeira requisição à API de temas.
+
 ### 4. Configure o Frontend
 
 #### 4.1 Instale as Dependências
@@ -252,15 +254,32 @@ npm start
 
 ## 📝 Credenciais de Teste
 
-Atualmente, o sistema não possui credenciais de teste pré-configuradas. Para testar o sistema:
+O projeto possui um script de seed que cria usuários de teste. Para usar:
 
-1. **Crie uma conta** através da página de cadastro (`/cadastro`)
-2. **Verifique seu e-mail** através do link enviado (em desenvolvimento, verifique o Mailtrap ou sua caixa de entrada)
-3. **Faça login** com as credenciais criadas
-4. **Crie uma redação** escolhendo um tema disponível
-5. **Receba a correção automática**
+1. **Execute o seed do banco de dados:**
+   ```bash
+   cd backend
+   npm run prisma:seed
+   ```
 
-**Nota:** Em produção, as credenciais de teste podem ser fornecidas através de seed de dados ou configuração administrativa.
+2. **Use as seguintes credenciais para login:**
+
+   **Usuário Admin (E-mail Verificado):**
+   - E-mail: `admin@redaia.com`
+   - Senha: `password123`
+   - Status: E-mail verificado ✅
+
+   **Usuário de Teste (E-mail Não Verificado):**
+   - E-mail: `test@redaia.com`
+   - Senha: `password123`
+   - Status: E-mail não verificado ⚠️
+
+3. **Ou crie uma nova conta** através da página de cadastro (`/cadastro`)
+
+**⚠️ Importante sobre Verificação de E-mail:**
+- Em modo **desenvolvimento** (NODE_ENV !== 'production'), os e-mails são automaticamente verificados ao cadastrar
+- Em modo **produção**, é necessário verificar o e-mail através do link enviado
+- Para testar o fluxo completo de verificação, configure `NODE_ENV=production` ou use o Mailtrap
 
 
 O vídeo apresenta todas as funcionalidades principais do Conexão Saber, incluindo cadastro, criação de redação, correção automática por IA e visualização de resultados.
