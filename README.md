@@ -332,9 +332,10 @@ Este projeto contribui para o **Objetivo de Desenvolvimento Sustentável 11 (Cid
 
 Para mais informações sobre o ODS 11: https://brasil.un.org/pt-br/sdgs/11
 
-## 📝 Licença
+## 📄 Licença
+MIT — livre para uso, estudo e melhorias.
 
-Este projeto foi desenvolvido para fins acadêmicos.
+> Este projeto foi desenvolvido para fins acadêmicos.
 
 ---
 
