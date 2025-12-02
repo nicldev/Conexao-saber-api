@@ -20,7 +20,10 @@ O projeto resolve a dificuldade de estudantes do Ensino Médio em obter correç�
 - **Cadastro de usuário** com validação completa de dados
 - **Verificação de e-mail** obrigatória para ativação da conta
 - **Login seguro** com JWT (access token e refresh token)
-- **Gerenciamento de perfil** (visualização, atualização)
+- **Gerenciamento de perfil** completo:
+  - Visualização e atualização de dados pessoais
+  - Alteração de senha com validação
+  - Exclusão de conta com confirmação por senha
 
 ### ✅ Editor de Redação
 - **Criação de nova redação** com editor de texto intuitivo e limpo
@@ -281,8 +284,90 @@ O projeto possui um script de seed que cria usuários de teste. Para usar:
 - Em modo **produção**, é necessário verificar o e-mail através do link enviado
 - Para testar o fluxo completo de verificação, configure `NODE_ENV=production` ou use o Mailtrap
 
+## 🧪 Guia de Testes para Avaliadores
 
-O vídeo apresenta todas as funcionalidades principais do Conexão Saber, incluindo cadastro, criação de redação, correção automática por IA e visualização de resultados.
+### Passo a Passo para Testar Localmente
+
+1. **Siga as instruções de instalação acima** (clone, configure banco, instale dependências)
+
+2. **Execute o seed para criar usuários de teste:**
+   ```bash
+   cd backend
+   npm run prisma:seed
+   ```
+
+3. **Inicie o backend:**
+   ```bash
+   cd backend
+   npm run dev
+   ```
+   Aguarde a mensagem: `🚀 Server running on http://localhost:3333`
+
+4. **Em outro terminal, inicie o frontend:**
+   ```bash
+   cd frontend/web
+   npm run dev
+   ```
+   Aguarde a mensagem: `Ready - started server on 0.0.0.0:3000`
+
+5. **Acesse o sistema:**
+   - Abra o navegador em: **http://localhost:3000**
+   - Faça login com as credenciais de teste:
+     - E-mail: `admin@redaia.com`
+     - Senha: `password123`
+
+### Funcionalidades para Testar
+
+#### ✅ Autenticação
+- [ ] Cadastro de novo usuário (`/cadastro`)
+- [ ] Login com credenciais de teste
+- [ ] Verificação de e-mail (automática em desenvolvimento)
+
+#### ✅ Gerenciamento de Perfil (`/perfil`)
+- [ ] Visualizar dados do perfil
+- [ ] Atualizar nome, escola e série
+- [ ] Alterar senha (requer senha atual)
+- [ ] Excluir conta (requer confirmação por senha)
+
+#### ✅ Redações
+- [ ] Criar nova redação (`/redacao/nova`)
+- [ ] Escrever texto no editor
+- [ ] Ver contador de palavras/caracteres
+- [ ] Salvar rascunho automaticamente
+- [ ] Submeter para correção
+- [ ] Visualizar resultados detalhados
+
+#### ✅ Dashboard (`/dashboard`)
+- [ ] Visualizar estatísticas gerais
+- [ ] Ver histórico de redações
+- [ ] Analisar desempenho por competência
+- [ ] Acompanhar evolução
+
+#### ✅ Temas
+- [ ] Listar temas disponíveis
+- [ ] Selecionar tema para redação
+- [ ] Ver descrição dos temas
+
+### Troubleshooting
+
+**Problema: Backend não inicia**
+- Verifique se o PostgreSQL está rodando
+- Confirme que o arquivo `.env` está configurado corretamente
+- Verifique se as migrations foram executadas: `npm run prisma:migrate`
+
+**Problema: Frontend não conecta ao backend**
+- Verifique se o backend está rodando em `http://localhost:3333`
+- Confirme que `NEXT_PUBLIC_API_URL=http://localhost:3333` está no `.env.local`
+
+**Problema: Erro ao fazer login**
+- Execute o seed novamente: `npm run prisma:seed`
+- Verifique se o usuário foi criado no banco de dados
+
+**Problema: E-mail não verificado**
+- Em desenvolvimento, os e-mails são auto-verificados
+- Se necessário, altere `emailVerified: true` diretamente no banco
+
+O vídeo demonstrativo apresenta todas as funcionalidades principais do Conexão Saber, incluindo cadastro, criação de redação, correção automática por IA e visualização de resultados.
 
 ## 📚 Documentação Técnica
 
@@ -326,14 +411,16 @@ conexaosaber-main/
 │   │   ├── middlewares/ # Middlewares
 │   │   ├── utils/       # Utilitários
 │   │   └── validators/  # Validadores
+│   ├── tests/           # Testes automatizados
 │   └── prisma/          # Schema e migrations
 ├── frontend/
 │   └── web/             # Frontend Next.js
-│       └── src/
-│           ├── app/     # Páginas
-│           ├── components/ # Componentes React
-│           ├── contexts/   # Context API
-│           └── lib/       # Bibliotecas e utilitários
+│       ├── src/
+│       │   ├── app/     # Páginas e rotas
+│       │   ├── components/ # Componentes React
+│       │   ├── contexts/   # Context API
+│       │   └── lib/       # Bibliotecas e utilitários
+│       └── public/      # Arquivos estáticos
 ├── docs/                # Documentação técnica
 ├── database/            # Scripts SQL
 ├── validation/          # Validação com público-alvo
