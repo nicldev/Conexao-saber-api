@@ -20,9 +20,7 @@ O projeto resolve a dificuldade de estudantes do Ensino Médio em obter correç�
 - **Cadastro de usuário** com validação completa de dados
 - **Verificação de e-mail** obrigatória para ativação da conta
 - **Login seguro** com JWT (access token e refresh token)
-- **Recuperação de senha** através de e-mail
-- **Gerenciamento de perfil** (visualização, atualização, alteração de senha)
-- **Exclusão de conta** com confirmação
+- **Gerenciamento de perfil** (visualização, atualização)
 
 ### ✅ Editor de Redação
 - **Criação de nova redação** com editor de texto intuitivo e limpo
@@ -31,7 +29,7 @@ O projeto resolve a dificuldade de estudantes do Ensino Médio em obter correç�
 - **Salvamento automático** de rascunhos
 - **Seleção de temas** de redação para prática
 
-### ✅ Correção Automática por Inteligência Artificial
+### ✅ Correção Automática
 - **Avaliação por competências** do ENEM (5 competências avaliadas)
   - Competência 1: Domínio da escrita formal
   - Competência 2: Compreensão do tema
@@ -60,7 +58,7 @@ O projeto resolve a dificuldade de estudantes do Ensino Médio em obter correç�
 ### ✅ Interface e Experiência do Usuário
 - **Design moderno** inspirado no Notion
 - **Modo escuro/claro** completo
-- **Interface responsiva** (mobile, tablet, desktop)
+- **Segregação completa entre frontend e backend
 - **Navegação intuitiva** e acessível
 - **Feedback visual** para todas as ações
 
@@ -71,8 +69,7 @@ O projeto resolve a dificuldade de estudantes do Ensino Médio em obter correç�
 - **React 18** - Biblioteca JavaScript para construção de interfaces
 - **TypeScript** - Linguagem de programação com tipagem estática
 - **Tailwind CSS** - Framework CSS utilitário para estilização
-- **Lucide React** - Biblioteca de ícones moderna
-- **Context API** - Gerenciamento de estado global (autenticação e tema)
+- **Axios** - Biblioteca de JavaScript que permite fazer requisições HTTP de maneira simples e eficiente
 
 ### Backend
 - **Node.js** (>=18) - Runtime JavaScript para execução no servidor
@@ -85,7 +82,6 @@ O projeto resolve a dificuldade de estudantes do Ensino Médio em obter correç�
 - **Zod** - Biblioteca de validação de schemas
 - **Nodemailer** - Envio de e-mails para verificação e recuperação
 - **Winston** - Sistema de logging estruturado
-- **Google Gemini AI** - API de Inteligência Artificial para correção de redações
 
 ### Banco de Dados
 - **PostgreSQL** - Banco de dados relacional de código aberto
@@ -174,17 +170,12 @@ CORS_ORIGIN=http://localhost:3000
 # Rate Limiting
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
-
-# AI Services (obrigatório para correção por IA)
-GEMINI_API_KEY=sua-chave-gemini-aqui
-GEMINI_MODEL=gemini-pro
 ```
 
 **⚠️ Importante:**
 - Substitua `postgres:postgres` pelas suas credenciais do PostgreSQL
 - Gere chaves secretas seguras para JWT (mínimo de 32 caracteres)
 - Configure o Mailtrap (https://mailtrap.io) para desenvolvimento ou outro serviço SMTP
-- Obtenha uma chave da API do Google Gemini AI em: https://makersuite.google.com/app/apikey
 
 #### 3.3 Configure o Prisma
 
@@ -267,7 +258,7 @@ Atualmente, o sistema não possui credenciais de teste pré-configuradas. Para t
 2. **Verifique seu e-mail** através do link enviado (em desenvolvimento, verifique o Mailtrap ou sua caixa de entrada)
 3. **Faça login** com as credenciais criadas
 4. **Crie uma redação** escolhendo um tema disponível
-5. **Receba a correção automática** por IA
+5. **Receba a correção automática**
 
 **Nota:** Em produção, as credenciais de teste podem ser fornecidas através de seed de dados ou configuração administrativa.
 
@@ -326,12 +317,14 @@ npm run test:watch
 
 ## 👥 Equipe de Desenvolvimento
 
-- Cleberson Assunção Tavares - Matrícula: 2325404
-- Francisco Flavio Rodrigues de Menezes - Matrícula: 2314219
-- Mayara Pinto da Silva - Matrícula: 2317573
-- Nicolas Lima Ribeiro - Matrícula: 2326327
-- Rodrigo de Queiroz Oliveira Rodrigues - Matrícula: 2326198
-- Thiago Targino de Souza - Matrícula: 2326340
+| Nome                     | Matrícula | Papel                            | Principais Contribuições                                                          |
+| ------------------------ | --------- | -------------------------------- | --------------------------------------------------------------------------------- |
+| **Nicolas Lima Ribeiro** | 2326327  | Frontend & Documentação          | Desenvolvimento UI, páginas e rotas, integração com API e documentação do projeto |
+| **Thiago Targino de Souza**       | 2326340  | Backend & Banco de Dados         | Modelagem do banco, CRUD, autenticação, serviços e infraestrutura da API          |
+| **Rodrigo de Queiroz Oliveira Rodrigues**     | 2326198  | QA / Testes                      | Testes funcionais e validação de experiência do usuário                           |
+| **Francisco Flavio Rodrigues de Menezes**       | 2314219  | QA / Testes                      | Testes, revisão e acompanhamento de funcionalidade                                |
+| **Cleberson Assunção Tavares**       | 2325404  | Pesquisa / Feedback com usuários | Validação prática com alunos e coleta de melhorias                                |
+| **Mayara Pinto da Silva**     | 2317573  | QA e Pesquisa                    | Testes e avaliação de usabilidade                                                 |
 
 ## 🌱 Contribuição para o ODS 11
 
